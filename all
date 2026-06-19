@@ -1,0 +1,88 @@
+shaz-ai-studio/
+│
+├── public/
+│   ├── index.html
+│   ├── chat.html
+│   ├── image.html
+│   ├── video.html
+│   ├── tts.html
+│   ├── script.html
+│   ├── shorts.html
+│   ├── style.css
+│   └── app.js
+│
+├── server.js
+├── package.json
+└── .env
+{
+  "name": "shaz-ai-studio",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0"
+  }
+
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static("public"));
+
+app.post("/chat", (req, res) => {
+    const msg = req.body.message;
+
+    res.json({
+        reply: "Hello! You said: " + msg
+    });
+});
+
+app.post("/script", (req, res) => {
+    const topic = req.body.topic;
+
+    res.json({
+        script:
+        "Welcome to today's video about " +
+        topic +
+        ". Let's begin!"
+    });
+});
+
+app.listen(3000, () => {
+    console.log("Shaz AI Studio Running");
+});
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shaz AI Studio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🚀 Shaz AI Studio</h1>
+
+<div class="grid">
+
+<a href="chat.html">💬 AI Chat</a>
+
+<a href="image.html">🖼 Image Generator</a>
+
+<a href="video.html">🎥 Video Generator</a>
+
+<a href="tts.html">🎤 Text To Speech</a>
+
+<a href="script.html">📄 Script Writer</a>
+
+<a href="shorts.html">📺 Shorts Creator</a>
+
+</div>
+
+</body>
+</html>
